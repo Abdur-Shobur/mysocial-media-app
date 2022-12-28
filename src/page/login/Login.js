@@ -1,26 +1,31 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { UseUser } from '../../context/UseAuth'
 
 function Login() {
+  const navigate = useNavigate()
   const { login } = useContext(UseUser)
   const form_login_handler = (e) => {
     e.preventDefault()
     const email = e.target.email.value
     const password = e.target.password.value
-    console.log(email, password)
+
     login(email, password)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+        navigate('/')
+      })
       .catch((err) => console.log(err))
   }
   return (
-    <div>
+    <div className="h-screen bg-white">
       <div className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
           <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
             Login
           </h2>
-
+          <h1 className="text-center">test email: abdur2@gmail.com</h1>
+          <h1 className="text-center">test password: abdur2@gmail.com</h1>
           <form
             className="max-w-lg border rounded-lg mx-auto"
             onSubmit={form_login_handler}

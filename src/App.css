@@ -205,6 +205,7 @@ main .container .left .profle {
 
 .left .sidebar .menu-item:first-child.active {
   border-top-left-radius: var(--card-border-radius);
+  border-top-right-radius: var(--card-border-radius);
   overflow: hidden;
 }
 .left .sidebar .menu-item:last-child.active {
@@ -325,7 +326,7 @@ main .container .left .profle {
   padding: 0.4rem var(--card-padding);
   border-radius: var(--border-radius);
 }
-.middle .create-comment {
+.create-comment {
   border: 1px solid #6b4ce6;
   width: 100%;
   display: flex;
@@ -530,6 +531,12 @@ main .container .left .profle {
   .main .container .left .profile {
     display: none;
   }
+  .log_out_show {
+    display: none;
+  }
+  .user_profile {
+    display: none;
+  }
   .sidebar h3 {
     display: none;
   }
@@ -544,7 +551,7 @@ main .container .left .profle {
     display: none;
   }
   main .container {
-    grid-template-columns: 0 auto 5rem;
+    grid-template-columns: 1fr;
     gap: 0;
   }
   main .container .left {

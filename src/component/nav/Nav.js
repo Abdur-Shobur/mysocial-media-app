@@ -9,7 +9,9 @@ function Nav() {
   return (
     <nav>
       <div className="container">
-        <h2 className="logo">ChiragSocial</h2>
+        <Link to="/" className="logo text-xl text-purple-800 font-semibold">
+          Social App
+        </Link>
         <div className="search-bar">
           <i className="uil uil-search"></i>
           <input
@@ -20,11 +22,11 @@ function Nav() {
         </div>
         <div className="create">
           <label className="btn btn-primary" htmlFor="create-post">
-            Create
+            <Link to="/">Create</Link>
           </label>
           <div className="profile-pic">
             <Link to="about">
-              <img src={logo} alt="pic 1" />
+              <img src={db_user?.info?.photoUrl} alt="pic 1" />
             </Link>
           </div>
         </div>
