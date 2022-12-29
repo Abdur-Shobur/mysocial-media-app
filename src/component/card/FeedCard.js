@@ -118,7 +118,7 @@ function FeedCard({
       </div>
 
       <div className="photo">
-        <img src={post_url} alt="" />
+        <img className="max-h-96 object-cover" src={post_url} alt="" />
       </div>
 
       <div className="action-button !my-6">

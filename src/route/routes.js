@@ -6,6 +6,7 @@ import Login from '../page/login/Login'
 import Signup from '../page/login/Signup'
 import Media from '../page/media/Media'
 import PostDetails from '../page/media/PostDetails'
+import Peoples from '../page/people/Peoples'
 import PrivetRoute from './PrivetRoute'
 
 const route = createBrowserRouter([
@@ -32,6 +33,10 @@ const route = createBrowserRouter([
       {
         path: 'about',
         element: <About />,
+      },
+      {
+        path: 'peoples',
+        element: <Peoples />,
       },
     ],
   },

@@ -39,11 +39,13 @@ function RightSidebar() {
         <MessageCard />
         <MessageCard />
       </div>
-      <div className="friend-requests">
+      <div className="friend-requests ">
         <h4>Requests</h4>
-        <FriendReqCard />
-        <FriendReqCard />
-        <FriendReqCard />
+        <div className="flex flex-col gap-2">
+          <FriendReqCard />
+          <FriendReqCard />
+          <FriendReqCard />
+        </div>
       </div>
     </div>
   )

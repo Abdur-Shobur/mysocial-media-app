@@ -15,7 +15,7 @@ function FriendReqCard() {
       </div>
       <div className="action">
         <button className="btn btn-primary">Accept</button>
-        <button className="btn">Decline</button>
+        <button className="btn text-rose-50 bg-red-600">Decline</button>
       </div>
     </div>
   )

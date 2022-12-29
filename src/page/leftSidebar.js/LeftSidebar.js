@@ -11,6 +11,7 @@ import { BiLogOutCircle } from 'react-icons/bi'
 import { Link, NavLink } from 'react-router-dom'
 // import user from '../../assets/images/userlist-2.jpg'
 import { UseUser } from '../../context/UseAuth'
+import { BsPeople } from 'react-icons/bs'
 const nav_items = [
   {
     path: '/',
@@ -23,23 +24,17 @@ const nav_items = [
     icon: <TfiLayoutMediaLeftAlt className="i" />,
   },
   {
+    path: 'peoples',
+    nav_item: 'Peoples',
+    icon: <BsPeople className="i" />,
+  },
+  {
     path: 'about',
     nav_item: 'About',
     icon: <AiOutlineUser className="i" />,
   },
 ]
-const nav_login_items = [
-  {
-    path: 'login',
-    nav_item: 'Login',
-    icon: <AiOutlineLogin className="i" />,
-  },
-  {
-    path: 'sign-up',
-    nav_item: 'Sign Up',
-    icon: <AiOutlineUserAdd className="i" />,
-  },
-]
+
 function LeftSidebar() {
   const { log_out, user, db_user } = useContext(UseUser)
   const sign_out_btn = () => {
@@ -74,18 +69,7 @@ function LeftSidebar() {
             <h3>{e.nav_item}</h3>
           </NavLink>
         ))}
-        {!user &&
-          nav_login_items?.map((e, i) => (
-            <NavLink
-              key={i}
-              to={e.path}
-              className={`menu-item ${(isActive) =>
-                isActive ? 'active' : ''}`}
-            >
-              <span>{e.icon}</span>
-              <h3>{e.nav_item}</h3>
-            </NavLink>
-          ))}
+
         {user && (
           <button
             onClick={sign_out_btn}
