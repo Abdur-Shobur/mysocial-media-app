@@ -1,6 +1,6 @@
-import { async } from '@firebase/util'
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { UseUser } from '../../context/UseAuth'
 import SignWith from './SignWith'
 
@@ -40,6 +40,14 @@ function Signup() {
             const data = await fetch_url.json()
             if (data) {
               navigate('/')
+              toast.success('Signup Success', {
+                position: 'bottom-left',
+                autoClose: 100,
+                hideProgressBar: false,
+                closeOnClick: true,
+                draggable: true,
+                theme: 'light',
+              })
             }
           } catch (err) {
             console.log(err)

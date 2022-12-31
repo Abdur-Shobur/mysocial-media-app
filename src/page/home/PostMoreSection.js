@@ -1,7 +1,6 @@
 import React from 'react'
 import userPost from '../../assets/images/user-post6.jpg'
 import userlist from '../../assets/images/userlist-2.jpg'
-import { AiFillEye } from 'react-icons/ai'
 import PostWatchLikeCount from '../../component/listItems/PostWatchLikeCount'
 import Comment from '../../component/listItems/Comment'
 
@@ -14,7 +13,7 @@ function PostMoreSection() {
           <img
             className="rounded-full max-w-[48px] w-12"
             src={userlist}
-            alt=""
+            alt="s"
           />
         </div>
         <div>

@@ -21,7 +21,7 @@ function PostDetails() {
     }
     fetch_fun()
   }, [id, load_post])
-  console.log(post)
+
   return (
     <div className="feeds">
       {post?.map((post) => (
@@ -33,6 +33,7 @@ function PostDetails() {
           set_load_post={set_load_post}
           load_post={load_post}
           hide
+          comment_show={post.length}
         />
       ))}
     </div>

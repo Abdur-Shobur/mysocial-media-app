@@ -1,9 +1,4 @@
 import React from 'react'
-import user from '../../assets/images/userlist-2.jpg'
-import { SiGooglemessages } from 'react-icons/si'
-import { AiOutlineLike, AiTwotoneBell } from 'react-icons/ai'
-import FriendsList from '../../component/listItems/FriendsList'
-import FriendReqCard from '../../component/card/FriendReqCard'
 import MessageCard from '../../component/card/MessageCard'
 
 function RightSidebar() {
@@ -42,9 +37,51 @@ function RightSidebar() {
       <div className="friend-requests ">
         <h4>Requests</h4>
         <div className="flex flex-col gap-2">
-          <FriendReqCard />
-          <FriendReqCard />
-          <FriendReqCard />
+          <div className="request">
+            <div className="info">
+              <div className="profile-pic">
+                <img src="https://i.ibb.co/yVKm1rw/dymmy-img.png" alt="d" />
+              </div>
+              <div>
+                <h5 className="capitalize">Jhone Doe</h5>
+                <p className="text-muted">1 mutual friend</p>
+              </div>
+            </div>
+            <div className="action">
+              <button className="btn btn-primary">Add Friend</button>
+              <button className="btn text-rose-50 bg-red-600">Remove</button>
+            </div>
+          </div>
+          <div className="request">
+            <div className="info">
+              <div className="profile-pic">
+                <img src="https://i.ibb.co/yVKm1rw/dymmy-img.png" alt="d" />
+              </div>
+              <div>
+                <h5 className="capitalize">Jhone Doe</h5>
+                <p className="text-muted">1 mutual friend</p>
+              </div>
+            </div>
+            <div className="action">
+              <button className="btn btn-primary">Add Friend</button>
+              <button className="btn text-rose-50 bg-red-600">Remove</button>
+            </div>
+          </div>
+          <div className="request">
+            <div className="info">
+              <div className="profile-pic">
+                <img src="https://i.ibb.co/yVKm1rw/dymmy-img.png" alt="d" />
+              </div>
+              <div>
+                <h5 className="capitalize">Jhone Doe</h5>
+                <p className="text-muted">1 mutual friend</p>
+              </div>
+            </div>
+            <div className="action">
+              <button className="btn btn-primary">Add Friend</button>
+              <button className="btn text-rose-50 bg-red-600">Remove</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

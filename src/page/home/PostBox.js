@@ -1,5 +1,4 @@
 import React from 'react'
-import userPost from '../../assets/images/user-post6.jpg'
 
 function PostBox() {
   return (

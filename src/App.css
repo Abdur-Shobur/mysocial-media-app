@@ -370,13 +370,17 @@ main .container .left .profle {
   border-radius: var(--card-border-radius);
   overflow: hidden;
   margin: 0.7rem 0;
+  box-shadow: inset 0 0 10px #6b4ce645;
 }
 .feed .action-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 1.4rem;
-  margin: 0.6rem;
+  margin-top: 0.8rem;
+  margin-bottom: 1.3rem;
+  margin-right: 0.6rem;
+  margin-left: 0.6rem;
 }
 
 .middle .liked-by {
@@ -401,7 +405,7 @@ main .container .left .profle {
   margin-left: 0.5rem;
 }
 
-.main .container .right {
+.right {
   height: max-content;
   position: sticky;
   top: var(--sticky-top-right);

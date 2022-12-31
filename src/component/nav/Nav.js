@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import logo from '../../assets/images/userlist-2.jpg'
 import { UseUser } from '../../context/UseAuth'
 
 function Nav() {
-  const { user, db_user } = useContext(UseUser)
+  const { db_user } = useContext(UseUser)
 
   return (
     <nav>

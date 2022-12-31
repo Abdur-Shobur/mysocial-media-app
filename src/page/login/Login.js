@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { UseUser } from '../../context/UseAuth'
 
 function Login() {
@@ -12,8 +13,15 @@ function Login() {
 
     login(email, password)
       .then((res) => {
-        console.log(res)
         navigate('/')
+        toast.success('Login success', {
+          position: 'bottom-left',
+          autoClose: 100,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          theme: 'light',
+        })
       })
       .catch((err) => console.log(err))
   }

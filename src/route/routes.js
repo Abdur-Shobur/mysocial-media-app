@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import Laout from '../layout/Laout'
+import Layout from '../layout/Laout'
 import About from '../page/about/About'
 import Home from '../page/home/Home'
 import Login from '../page/login/Login'
@@ -14,7 +14,7 @@ const route = createBrowserRouter([
     path: '/',
     element: (
       <PrivetRoute>
-        <Laout />
+        <Layout />
       </PrivetRoute>
     ),
     children: [

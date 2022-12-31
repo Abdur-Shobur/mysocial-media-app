@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { AiOutlineLike, AiOutlineShareAlt } from 'react-icons/ai'
+import { AiFillLike, AiOutlineLike, AiOutlineShareAlt } from 'react-icons/ai'
 import { BiCommentDots } from 'react-icons/bi'
-import { BsBookmarkCheck, BsUpload } from 'react-icons/bs'
-import userr from '../../assets/images/userlist-2.jpg'
-import post from '../../assets/images/user-post6.jpg'
+import { BsBookmarkCheck } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 function FeedCard({
   post,
@@ -14,13 +13,15 @@ function FeedCard({
   set_load_post,
   media,
   hide,
+  shadow,
+  comment_show,
 }) {
   const [comment, setComment] = useState([])
   const [load_comment, set_load_comment] = useState(true)
+  const [like, setLike] = useState(true)
+
   useEffect(() => {
-    fetch(
-      `https://end-game-server-abdur-shobur.vercel.app/comment?_id=${post?._id}`,
-    )
+    fetch(`${process.env.REACT_APP_URL}/comment?_id=${post?._id}`)
       .then((res) => res.json())
       .then((data) => setComment(data))
       .catch((err) => console.log(err))
@@ -35,6 +36,8 @@ function FeedCard({
     post_react,
     post_time,
   } = post
+
+  // comment
   const comment_handler = (e) => {
     e.preventDefault()
     let milliseconds = new Date().getTime()
@@ -48,25 +51,30 @@ function FeedCard({
       user_id: db_user?._id,
       post_id: post?._id,
     }
-
     const update_comment = async () => {
-      const fetch_url = await fetch(
-        `https://end-game-server-abdur-shobur.vercel.app/comment`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-type': 'application/json',
-          },
-          body: JSON.stringify(all_data),
+      const fetch_url = await fetch(`${process.env.REACT_APP_URL}/comment`, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
         },
-      )
+        body: JSON.stringify(all_data),
+      })
       const response = await fetch_url.json()
-
       set_load_comment(!load_comment)
+      toast.success('Comment Added Success', {
+        position: 'bottom-left',
+        autoClose: 100,
+        hideProgressBar: false,
+        closeOnClick: true,
+        draggable: true,
+        theme: 'light',
+      })
     }
     update_comment()
     e.target.reset()
   }
+
+  // like
   const update_like_handler = (e, likes) => {
     const like = likes + 1
     const data = {
@@ -85,12 +93,14 @@ function FeedCard({
       )
       const response = await fetch_url.json()
       set_load_post(!load_post)
+      setLike(false)
     }
 
     get_fetch_data()
   }
+
   return (
-    <div className="feed">
+    <div className={`feed ${shadow}`}>
       <div className="head"></div>
       <div className="user">
         <div className="profile-pic">
@@ -118,33 +128,43 @@ function FeedCard({
       </div>
 
       <div className="photo">
-        <img className="max-h-96 object-cover" src={post_url} alt="" />
+        <img
+          className="max-h-[450px] object-contain p-3 !rounded-3xl"
+          src={post_url}
+          alt=""
+        />
       </div>
 
-      <div className="action-button !my-6">
+      <div className="action-button ">
         <div className="flex gap-6">
           <div className="flex ">
-            <AiOutlineLike
-              onClick={() => update_like_handler(post._id, post_react.like)}
-              className="text-blue-700 cursor-pointer hover:text-fuchsia-600"
-            />
-            <span className="text-sm text-blue-700">{post_react.like}</span>
+            {like ? (
+              <AiOutlineLike
+                onClick={() => update_like_handler(post._id, post_react.like)}
+                className="text-blue-700 text-3xl cursor-pointer hover:text-fuchsia-600"
+              />
+            ) : (
+              <AiFillLike className="text-[#6b4ce6] text-3xl cursor-pointer hover:text-fuchsia-600" />
+            )}
+            <span className="text-sm ml text-blue-700">{post_react.like}</span>
           </div>
           <div className="flex ">
-            <BiCommentDots className="text-green-700" />
-            <span className="text-sm text-green-600">{post_react.comment}</span>
+            <BiCommentDots className="text-green-700 text-3xl" />
+            <span className="text-sm ml text-green-600">{comment.length}</span>
           </div>
           <div className="flex ">
-            <AiOutlineShareAlt className="text-orange-700" />
-            <span className="text-sm text-orange-700">{post_react.share}</span>
+            <AiOutlineShareAlt className="text-orange-700 text-3xl" />
+            <span className="text-sm ml text-orange-700">
+              {post_react.share}
+            </span>
           </div>
         </div>
-        <div className="bookmark text-[#6b4ce6]">
+        <div className="bookmark text-[#6b4ce6] text-3xl">
           <BsBookmarkCheck />
           <span></span>
         </div>
       </div>
-      {comment?.map((e) => (
+      {comment.slice(0, comment_show)?.map((e) => (
         <div
           key={e._id}
           className="flex bg-[#efeef5] gap-5 my-2 p-3 ml-10 rounded"
@@ -165,7 +185,16 @@ function FeedCard({
           </div>
         </div>
       ))}
-
+      <div className="flex justify-end">
+        {!hide && comment.length > 3 && (
+          <Link
+            to={`/details/${post._id}`}
+            className="bg-[#6b4ce6] text-white px-4 py-1 rounded text-xs"
+          >
+            View All {comment.length} Comments
+          </Link>
+        )}
+      </div>
       <div className=" ">
         <form className="create-comment" onSubmit={comment_handler}>
           <input

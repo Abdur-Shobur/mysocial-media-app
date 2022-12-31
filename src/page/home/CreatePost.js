@@ -1,6 +1,6 @@
 import React from 'react'
 import { BiImages } from 'react-icons/bi'
-import { BsUpload } from 'react-icons/bs'
+import { toast } from 'react-toastify'
 
 function CreatePost({ user, db_user, set_load_post }) {
   const post_form_handler = async (e) => {
@@ -48,8 +48,25 @@ function CreatePost({ user, db_user, set_load_post }) {
           )
           const response = await fetch_url.json()
           set_load_post(true)
+          toast.success('Your Post is Live', {
+            position: 'bottom-left',
+            autoClose: 100,
+            hideProgressBar: false,
+            closeOnClick: true,
+            draggable: true,
+            theme: 'light',
+          })
         }
         post_db()
+      } else {
+        toast.error('Image is not uploaded', {
+          position: 'bottom-left',
+          autoClose: 300,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          theme: 'light',
+        })
       }
     } catch (err) {
       console.log(err)

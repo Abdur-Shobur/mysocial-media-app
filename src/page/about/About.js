@@ -1,14 +1,32 @@
-import { async } from '@firebase/util'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BsUpload } from 'react-icons/bs'
 import { RxCross2 } from 'react-icons/rx'
-import img from '../../assets/images/userlist-2.jpg'
+import { BarLoader } from 'react-spinners'
+import FeedCard from '../../component/card/FeedCard'
 import { UseUser } from '../../context/UseAuth'
 function About() {
   const [toggle, setToggle] = useState(false)
+  const [ur_post, set_ur_post] = useState([])
+  const [loader, setLoader] = useState(true)
+  const [load_post, set_load_post] = useState(false)
+  const [load_more, set_load_more] = useState(6)
+
   const { user, db_user, update_profile, set_update_profile } = useContext(
     UseUser,
   )
+  useEffect(() => {
+    const fetch_fun = async () => {
+      const fetch_url = await fetch(
+        `${process.env.REACT_APP_URL}/post-by-u_id?id=${db_user?._id}&load_more=${load_more}`,
+      )
+      const response = await fetch_url.json()
+      set_ur_post(response)
+      set_load_post(!load_post)
+      setLoader(false)
+    }
+    fetch_fun()
+  }, [db_user, load_more, load_post])
+
   const update_form_handler = (e) => {
     e.preventDefault()
     let target = e.target
@@ -53,8 +71,7 @@ function About() {
               },
             )
             const response = await fetch_url.json()
-            console.log(response)
-            set_update_profile(true)
+            set_update_profile(!update_profile)
           }
 
           update_user()
@@ -67,6 +84,7 @@ function About() {
     }
     photo_upload()
   }
+
   return (
     <div className="bg-white rounded-xl">
       <div className="p-6">
@@ -198,28 +216,65 @@ function About() {
           </div>
         )}
         {/* end edit from  */}
-
-        <div className="flex justify-center items-center">
+        <div className="bg-white font-semibold text-center rounded-3xl  border shadow-lg p-10">
           <img
+            className="mb-3 w-32 h-32 rounded-full mx-auto shadow-lg"
             src={user && db_user?.info?.photoUrl}
-            alt=""
-            className="w-40 rounded-full"
+            alt="product designer"
           />
+          <h1 className="text-lg text-gray-700"> {user && db_user?.name}</h1>
+          <h3 className="text-sm text-gray-400">
+            Email: {user && db_user?.email}
+          </h3>
+          <h3 className="text-sm text-gray-400">
+            University: {user && db_user?.info?.university}
+          </h3>
+          <h3 className="text-sm text-gray-400">
+            Address: {user && db_user?.info?.address}
+          </h3>
+          <p className="text-xs text-gray-400 mt-4">
+            {user && db_user?.info?.about_me}
+          </p>
+          {/* <button className="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">
+            Hire Me
+          </button> */}
         </div>
-        <h1 className="text-center text-2xl mt-5">
-          Name: {user && db_user?.name}
-        </h1>
-        <h1 className="text-center text-2xl mt-5">
-          Email: {user && db_user?.email}
-        </h1>
-        <h1 className="text-center text-2xl mt-5">
-          University: {user && db_user?.info?.university}
-        </h1>
-        <h1 className="text-center text-2xl mt-5">
-          Address: {user && db_user?.info?.address}
-        </h1>
-        <h1 className="text-2xl mt-5 underline">About Me: </h1>
-        <p className="text-xl mt-2">{user && db_user?.info?.about_me}</p>
+
+        <div className="mt-10">
+          <h1 className="text-xl text-sky-800 font-semibold">
+            Your All Post is Here
+          </h1>
+          <div className="feeds">
+            {loader && (
+              <div className="flex items-center justify-center mt-5">
+                <BarLoader color="#36d7b7" width={'100%'} />
+              </div>
+            )}
+
+            {ur_post?.map((post) => (
+              <FeedCard
+                key={post._id}
+                post={post}
+                user={user}
+                db_user={db_user}
+                set_load_post={set_load_post}
+                load_post={load_post}
+                comment_show={3}
+                shadow="shadow-lg shadow-gray-300"
+              />
+            ))}
+          </div>
+          <div className="flex justify-center ">
+            {!loader && ur_post.length >= load_more && (
+              <button
+                className="text bg-center bg-blue-600 px-4 py-2 !rounded-md text-white mb-10"
+                onClick={() => set_load_more((pre) => pre + 5)}
+              >
+                See more post
+              </button>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   )
