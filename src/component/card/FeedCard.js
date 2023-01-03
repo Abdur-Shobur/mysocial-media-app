@@ -107,7 +107,12 @@ function FeedCard({
           <img src={user_image} alt="" />
         </div>
         <div className="info">
-          <h3 className="text-blue-700 font-semibold">{user_name}</h3>
+          <Link
+            to={`/user-about/${user_id}`}
+            className="text-blue-700 font-semibold block"
+          >
+            {user_name}
+          </Link>
           <small>{new Date(post_time).toLocaleTimeString()}</small>
         </div>
         <span className="edit">
@@ -177,7 +182,9 @@ function FeedCard({
             />
           </div>
           <div>
-            <p className="text-blue-700">{e.user_name}</p>
+            <Link to={`/user-about/${e.user_id}`}>
+              <p className="text-blue-700">{e.user_name}</p>
+            </Link>
             <p className="text-stone-700">{e.comment}</p>
             <p className="text-xs text-green-700">
               {new Date(e.create_time).toLocaleTimeString()}

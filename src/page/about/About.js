@@ -216,6 +216,7 @@ function About() {
           </div>
         )}
         {/* end edit from  */}
+
         <div className="bg-white font-semibold text-center rounded-3xl  border shadow-lg p-10">
           <img
             className="mb-3 w-32 h-32 rounded-full mx-auto shadow-lg"
