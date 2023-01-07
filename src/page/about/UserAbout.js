@@ -8,7 +8,7 @@ function UserAbout() {
   const { user, db_user } = useContext(UseUser)
   const params = useParams()
   const [userById, setUserById] = useState([])
-  const [userpost, set_user_post] = useState([])
+  const [user_post, set_user_post] = useState([])
   const [loader, setLoader] = useState(true)
   const [load_post, set_load_post] = useState(false)
   const [load_more, set_load_more] = useState(6)
@@ -69,7 +69,7 @@ function UserAbout() {
             </div>
           )}
 
-          {userpost?.map((post) => (
+          {user_post?.map((post) => (
             <FeedCard
               key={post._id}
               post={post}
@@ -83,7 +83,7 @@ function UserAbout() {
           ))}
         </div>
         <div className="flex justify-center ">
-          {!loader && userpost.length >= load_more && (
+          {!loader && user_post.length >= load_more && (
             <button
               className="text bg-center bg-blue-600 px-4 py-2 !rounded-md text-white mb-10"
               onClick={() => set_load_more((pre) => pre + 5)}

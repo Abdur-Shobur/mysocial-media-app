@@ -1,7 +1,27 @@
 import React from 'react'
 
-function FriendReqCard({ user, text, ul_text, add_handler }) {
+function FriendReqCard({ user, text, ul_text, db_user }) {
   const { _id, info, name } = user
+  const add_friend_handler = (id) => {
+    const all_data = {
+      user_id: db_user?._id,
+      user_name: db_user?.name,
+      user_photo: db_user?.info.photoUrl,
+    }
+    console.log(all_data)
+    const fetch_func = async () => {
+      const fetch_url = await fetch(
+        `${process.env.REACT_APP_URL}/user-add-friends?id=${id}`,
+        {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(all_data),
+        },
+      )
+      const response = await fetch_url.json()
+    }
+    fetch_func()
+  }
   return (
     <div className="request">
       <div className="info">
@@ -14,7 +34,10 @@ function FriendReqCard({ user, text, ul_text, add_handler }) {
         </div>
       </div>
       <div className="action">
-        <button onClick={() => add_handler(_id)} className="btn btn-primary">
+        <button
+          onClick={() => add_friend_handler(_id)}
+          className="btn btn-primary"
+        >
           {text}
         </button>
         <button className="btn text-rose-50 bg-red-600">{ul_text}</button>

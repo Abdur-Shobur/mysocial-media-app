@@ -95,6 +95,7 @@ function Peoples() {
                 <FriendReqCard
                   key={user._id}
                   user={user}
+                  db_user={db_user}
                   text="Add Friend"
                   ul_text="Remove"
                   add_handler={add_friend_handler}
