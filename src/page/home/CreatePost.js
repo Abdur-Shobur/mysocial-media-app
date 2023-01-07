@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BiImages } from 'react-icons/bi'
+import { BeatLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 
 function CreatePost({ user, db_user, set_load_post }) {
+  const [loading, setLoading] = useState(false)
   const post_form_handler = async (e) => {
+    setLoading(true)
     e.preventDefault()
     let formData = new FormData()
     const post_text = e.target.post.value
@@ -48,6 +51,7 @@ function CreatePost({ user, db_user, set_load_post }) {
           )
           const response = await fetch_url.json()
           set_load_post(true)
+          setLoading(false)
           toast.success('Your Post is Live', {
             position: 'bottom-left',
             autoClose: 100,
@@ -100,12 +104,24 @@ function CreatePost({ user, db_user, set_load_post }) {
         type="file"
         style={{ display: 'none' }}
       />
-      <input
+
+      <button
         type="submit"
         disabled={!user}
-        value="Post"
+        className="btn btn-primary !flex justify-center items-center "
+      >
+        {loading ? (
+          <BeatLoader color="#ffffff" size={5} className="inline-block py-2" />
+        ) : (
+          'Post'
+        )}
+      </button>
+      {/* <input
+        type="submit"
+        disabled={!user}
+        value={loading ? <BeatLoader color="#36d7b7" /> : 'Post'}
         className="btn btn-primary"
-      />
+      /> */}
     </form>
   )
 }

@@ -32,8 +32,8 @@ function Login() {
           <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
             Login
           </h2>
-          <h1 className="text-center">test email: abdur2@gmail.com</h1>
-          <h1 className="text-center">test password: abdur2@gmail.com</h1>
+          <h1 className="text-center">test email: mr.user@gmail.com</h1>
+          <h1 className="text-center">test password: *123abc</h1>
           <form
             className="max-w-lg border rounded-lg mx-auto"
             onSubmit={form_login_handler}

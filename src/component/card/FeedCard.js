@@ -4,21 +4,24 @@ import { BiCommentDots } from 'react-icons/bi'
 import { BsBookmarkCheck } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { BeatLoader } from 'react-spinners'
 
-function FeedCard({
-  post,
-  user,
-  db_user,
-  load_post,
-  set_load_post,
-  media,
-  hide,
-  shadow,
-  comment_show,
-}) {
+function FeedCard({ ...reset }) {
+  const {
+    post,
+    user,
+    db_user,
+    load_post,
+    set_load_post,
+    media,
+    hide,
+    shadow,
+    comment_show,
+  } = reset
   const [comment, setComment] = useState([])
   const [load_comment, set_load_comment] = useState(true)
   const [like, setLike] = useState(true)
+  const [loadingComment, setLoadingComment] = useState(false)
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/comment?_id=${post?._id}`)
@@ -39,6 +42,7 @@ function FeedCard({
 
   // comment
   const comment_handler = (e) => {
+    setLoadingComment(true)
     e.preventDefault()
     let milliseconds = new Date().getTime()
     const comment = e.target.comment.value
@@ -61,14 +65,7 @@ function FeedCard({
       })
       const response = await fetch_url.json()
       set_load_comment(!load_comment)
-      toast.success('Comment Added Success', {
-        position: 'bottom-left',
-        autoClose: 100,
-        hideProgressBar: false,
-        closeOnClick: true,
-        draggable: true,
-        theme: 'light',
-      })
+      setLoadingComment(false)
     }
     update_comment()
     e.target.reset()
@@ -212,7 +209,17 @@ function FeedCard({
             id="create-post"
           />
 
-          <input type="submit" value="Comment" className="btn btn-primary" />
+          <button type="submit" className="btn btn-primary !flex ">
+            {loadingComment ? (
+              <BeatLoader
+                color="#ffffff"
+                size={5}
+                className="inline-block py-[5px] px-5"
+              />
+            ) : (
+              'Comment'
+            )}
+          </button>
         </form>
       </div>
     </div>
