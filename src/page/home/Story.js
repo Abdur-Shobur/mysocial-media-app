@@ -16,8 +16,8 @@ function Story({ user, db_user }) {
       .then((res) => res.json())
       .then((data) => setMyDay(data))
       .catch((err) => console.log(err))
-  }, [load_day])
-  console.log(myDay)
+  }, [load_day, user])
+
   const my_day_handler = async (e) => {
     setLoading(true)
     e.preventDefault()
@@ -56,7 +56,7 @@ function Story({ user, db_user }) {
         set_load_day(!load_day)
         setLoading(false)
         toast.success('Your Post is Live', {
-          position: 'bottom-left',
+          position: 'top-center',
           autoClose: 100,
           hideProgressBar: false,
           closeOnClick: true,

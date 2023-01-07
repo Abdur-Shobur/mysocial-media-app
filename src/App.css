@@ -274,6 +274,8 @@ main .container .left .profle {
   font-size: 0.75rem;
   position: relative;
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
 }
 
 .middle .stories .story::before {

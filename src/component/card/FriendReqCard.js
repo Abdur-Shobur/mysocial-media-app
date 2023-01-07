@@ -9,7 +9,7 @@ function FriendReqCard({ user, text, ul_text, db_user }) {
       user_name: db_user?.name,
       user_photo: db_user?.info.photoUrl,
     }
-    console.log(all_data)
+
     const fetch_func = async () => {
       const fetch_url = await fetch(
         `${process.env.REACT_APP_URL}/user-add-friends?id=${id}`,
