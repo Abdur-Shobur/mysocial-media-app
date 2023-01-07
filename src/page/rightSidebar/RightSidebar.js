@@ -1,7 +1,15 @@
 import React from 'react'
+import { toast } from 'react-toastify'
 import MessageCard from '../../component/card/MessageCard'
 
 function RightSidebar() {
+  const add_friend_handler = () => {
+    toast.error('Not Completed Yet', {
+      autoClose: 300,
+      draggable: true,
+      position: 'top-center',
+    })
+  }
   return (
     <div className="right">
       <div className="messages">
@@ -48,8 +56,18 @@ function RightSidebar() {
               </div>
             </div>
             <div className="action">
-              <button className="btn btn-primary">Add Friend</button>
-              <button className="btn text-rose-50 bg-red-600">Remove</button>
+              <button
+                className="btn btn-primary"
+                onClick={() => add_friend_handler()}
+              >
+                Add Friend
+              </button>
+              <button
+                className="btn text-rose-50 bg-red-600"
+                onClick={() => add_friend_handler()}
+              >
+                Remove
+              </button>
             </div>
           </div>
           <div className="request">

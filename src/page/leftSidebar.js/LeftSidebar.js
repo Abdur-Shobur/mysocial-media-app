@@ -69,9 +69,9 @@ function LeftSidebar() {
             <span className="log_out_show">Log out</span>
           </button>
         )}
-        <label className="btn btn-primary" htmlFor="create-post">
+        <Link to={'/'} className="btn btn-primary">
           Create Post
-        </label>
+        </Link>
       </div>
     </div>
   )

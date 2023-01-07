@@ -1,4 +1,5 @@
 import React from 'react'
+import { toast } from 'react-toastify'
 
 function FriendReqCard({ user, text, ul_text, db_user }) {
   const { _id, info, name } = user
@@ -20,7 +21,12 @@ function FriendReqCard({ user, text, ul_text, db_user }) {
       )
       const response = await fetch_url.json()
     }
-    fetch_func()
+    toast.error('Not Completed Yet', {
+      autoClose: 300,
+      draggable: true,
+      position: 'top-center',
+    })
+    // fetch_func()
   }
   return (
     <div className="request">
@@ -40,7 +46,12 @@ function FriendReqCard({ user, text, ul_text, db_user }) {
         >
           {text}
         </button>
-        <button className="btn text-rose-50 bg-red-600">{ul_text}</button>
+        <button
+          onClick={() => add_friend_handler()}
+          className="btn text-rose-50 bg-red-600"
+        >
+          {ul_text}
+        </button>
       </div>
     </div>
   )

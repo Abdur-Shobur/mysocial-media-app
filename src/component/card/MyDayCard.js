@@ -1,13 +1,16 @@
 import React from 'react'
 import user from '../../assets/images/user-post6.jpg'
 
-function MyDayCard() {
+function MyDayCard({ data }) {
   return (
-    <div className="story h-full" style={{ backgroundImage: `url(${user})` }}>
+    <div
+      className="story h-full"
+      style={{ backgroundImage: `url(${data.day_photo})` }}
+    >
       <div className="profile-pic">
-        <img src={user} alt="" />
+        <img src={data.user_img} alt="" />
       </div>
-      <p className="name">Your Story</p>
+      <p className="name">{data.user_name}</p>
     </div>
   )
 }

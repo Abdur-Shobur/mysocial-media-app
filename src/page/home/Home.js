@@ -11,7 +11,7 @@ function Home() {
   const [post, set_post] = useState([])
   const [load_post, set_load_post] = useState(false)
   const [loader, setLoader] = useState(true)
-  // setLoader(true)
+  console.log(post)
   useEffect(() => {
     fetch(
       `https://end-game-server-abdur-shobur.vercel.app/post?load_more=${load_more}`,
@@ -26,7 +26,7 @@ function Home() {
 
   return (
     <div className="middle">
-      <Story />
+      <Story user={user} db_user={db_user} />
 
       <CreatePost user={user} db_user={db_user} set_load_post={set_load_post} />
 
