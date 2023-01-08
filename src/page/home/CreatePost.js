@@ -8,10 +8,20 @@ function CreatePost({ user, db_user, set_load_post }) {
   const post_form_handler = async (e) => {
     setLoading(true)
     e.preventDefault()
-    let formData = new FormData()
     const post_text = e.target.post.value
+    if (post_text.length < 3) {
+      setLoading(false)
+      return toast.error('Minimum add 3 char', {
+        position: 'top-center',
+        autoClose: 200,
+        closeOnClick: true,
+        draggable: true,
+      })
+    }
+    let formData = new FormData()
     const post_image = e.target.image
     formData.append('image', post_image.files[0])
+
     let milliseconds = new Date().getTime()
     try {
       const fetch_url = await fetch(
@@ -23,6 +33,7 @@ function CreatePost({ user, db_user, set_load_post }) {
         },
       )
       const response = await fetch_url.json()
+
       if (response.success) {
         const all_data = {
           post_text,
@@ -63,6 +74,7 @@ function CreatePost({ user, db_user, set_load_post }) {
         }
         post_db()
       } else {
+        setLoading(false)
         toast.error('Image is not uploaded', {
           position: 'bottom-left',
           autoClose: 300,
@@ -74,6 +86,7 @@ function CreatePost({ user, db_user, set_load_post }) {
       }
     } catch (err) {
       console.log(err)
+      setLoading(false)
     }
     e.target.reset()
   }

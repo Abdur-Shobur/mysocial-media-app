@@ -88,7 +88,7 @@ function Story({ user, db_user }) {
           onSubmit={my_day_handler}
           className="flex justify-center items-center flex-col gap-1"
         >
-          <label htmlFor="icon-button-file">
+          <label htmlFor="icon-button-files">
             <RiImageAddFill
               color="primary"
               aria-label="upload picture"
@@ -99,7 +99,7 @@ function Story({ user, db_user }) {
           <input
             // accept="image/*"
             name="image"
-            id="icon-button-file"
+            id="icon-button-files"
             type="file"
             style={{ display: 'none' }}
           />

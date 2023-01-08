@@ -48,6 +48,15 @@ function FeedCard({ ...reset }) {
     let milliseconds = new Date().getTime()
     const comment = e.target.comment.value
 
+    if (comment.length < 3) {
+      setLoadingComment(false)
+      return toast.error('Something is wrong', {
+        position: 'top-center',
+        autoClose: 200,
+        closeOnClick: true,
+        draggable: true,
+      })
+    }
     const all_data = {
       comment,
       create_time: milliseconds,
