@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import { UseUser } from '../../context/UseAuth'
 import SignWith from './SignWith'
 
@@ -14,6 +14,7 @@ function Login() {
 
     login(email, password)
       .then((res) => {
+        console.log(res)
         navigate('/')
         toast.success('Login success', {
           position: 'bottom-left',
@@ -24,10 +25,19 @@ function Login() {
           theme: 'light',
         })
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        console.log(err)
+        toast.error('Something is wrong', {
+          position: 'top-center',
+          autoClose: 200,
+          closeOnClick: true,
+          draggable: true,
+        })
+      })
   }
   return (
     <div className="h-screen bg-white">
+      <ToastContainer />
       <div className="bg-white py-6 sm:py-8 lg:py-12">
         <div className="max-w-screen-2xl px-4 md:px-8 mx-auto">
           <h2 className="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
