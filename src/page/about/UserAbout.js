@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { BarLoader } from 'react-spinners'
 import FeedCard from '../../component/card/FeedCard'
+import ChangeTittle from '../../context/ChangeTittle'
 import { UseUser } from '../../context/UseAuth'
 
 function UserAbout() {
@@ -13,6 +14,7 @@ function UserAbout() {
   const [load_post, set_load_post] = useState(false)
   const [load_more, set_load_more] = useState(6)
 
+  ChangeTittle(`About`)
   useEffect(() => {
     const fetch_fun = async () => {
       const fetch_url = await fetch(

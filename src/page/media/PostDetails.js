@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import FeedCard from '../../component/card/FeedCard'
+import ChangeTittle from '../../context/ChangeTittle'
 import { UseUser } from '../../context/UseAuth'
 
 function PostDetails() {
+  ChangeTittle('Post')
   const [post, setPost] = useState([])
   const { user, db_user } = useContext(UseUser)
   // const [post, set_post] = useState([])

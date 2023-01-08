@@ -4,8 +4,9 @@ import { UseUser } from '../../context/UseAuth'
 import CreatePost from './CreatePost'
 import Story from './Story'
 import { BarLoader } from 'react-spinners'
-import { Helmet } from 'react-helmet'
+import ChangeTittle from '../../context/ChangeTittle'
 function Home() {
+  ChangeTittle('My Social App')
   const { user, db_user } = useContext(UseUser)
   const [load_more, set_load_more] = useState(5)
   const [post, set_post] = useState([])

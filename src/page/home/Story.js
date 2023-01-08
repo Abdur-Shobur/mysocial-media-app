@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Virtual } from 'swiper'
 import { RiImageAddFill } from 'react-icons/ri'
 import { toast } from 'react-toastify'
 import { Navigation, Pagination } from 'swiper'
@@ -92,7 +93,7 @@ function Story({ user, db_user }) {
               color="primary"
               aria-label="upload picture"
               component="span"
-              className="text-4xl mx-auto cursor-pointer "
+              className="text-4xl mx-auto cursor-pointer text-indigo-900"
             />
           </label>
           <input
@@ -117,6 +118,7 @@ function Story({ user, db_user }) {
         </form>
       </div>
       <Swiper
+        virtual
         slidesPerView={3}
         spaceBetween={20}
         slidesPerGroup={3}
@@ -138,11 +140,11 @@ function Story({ user, db_user }) {
           },
         }}
         navigation={true}
-        modules={[Pagination, Navigation]}
+        modules={[Pagination, Navigation, Virtual]}
         className="stories w-full md:max-w-md lg:max-w-xl  absolute "
       >
-        {myDay.map((e) => (
-          <SwiperSlide key={e._id}>
+        {myDay.map((e, i) => (
+          <SwiperSlide key={e._id} virtualIndex={i}>
             <MyDayCard data={e} />
           </SwiperSlide>
         ))}

@@ -10,7 +10,10 @@ function SignWith() {
         </span>
       </div>
 
-      <button className="flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
+      <button
+        disabled
+        className="cursor-not-allowed	 flex justify-center items-center bg-blue-500 hover:bg-blue-600 active:bg-blue-700 focus-visible:ring ring-blue-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+      >
         <svg
           className="w-5 h-5 shrink-0"
           width="24"
@@ -27,7 +30,10 @@ function SignWith() {
         Continue with Facebook
       </button>
 
-      <button className="flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3">
+      <button
+        disabled
+        className="cursor-not-allowed	 flex justify-center items-center bg-white hover:bg-gray-100 active:bg-gray-200 border border-gray-300 focus-visible:ring ring-gray-300 text-gray-800 text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 gap-2 px-8 py-3"
+      >
         <svg
           className="w-5 h-5 shrink-0"
           width="24"

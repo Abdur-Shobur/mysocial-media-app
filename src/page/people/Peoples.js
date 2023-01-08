@@ -3,6 +3,7 @@ import FriendReqCard from '../../component/card/FriendReqCard'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { UseUser } from '../../context/UseAuth'
 import { BarLoader } from 'react-spinners'
+import ChangeTittle from '../../context/ChangeTittle'
 
 function Peoples() {
   const { db_user } = useContext(UseUser)
@@ -10,6 +11,7 @@ function Peoples() {
   const [loader, setLoader] = useState(true)
   const [load_more, set_load_more] = useState(16)
 
+  ChangeTittle(`Peoples`)
   useEffect(() => {
     const fetch_func = async () => {
       const fetch_url = await fetch(

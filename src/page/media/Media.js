@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BarLoader } from 'react-spinners'
 import FeedCard from '../../component/card/FeedCard'
+import ChangeTittle from '../../context/ChangeTittle'
 import { UseUser } from '../../context/UseAuth'
 
 function Media() {
+  ChangeTittle('Media')
   const [post, set_post] = useState([])
   const [load_post, set_load_post] = useState(false)
   const { user, db_user } = useContext(UseUser)

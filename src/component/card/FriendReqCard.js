@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 function FriendReqCard({ user, text, ul_text, db_user }) {
@@ -35,7 +36,9 @@ function FriendReqCard({ user, text, ul_text, db_user }) {
           <img src={info.photoUrl} alt="d" />
         </div>
         <div>
-          <h5 className="capitalize">{name}</h5>
+          <Link to={`/user-about/${_id}`} className="capitalize">
+            {name}
+          </Link>
           <p className="text-muted">1 mutual friend</p>
         </div>
       </div>

@@ -3,6 +3,8 @@ import { BsUpload } from 'react-icons/bs'
 import { RxCross2 } from 'react-icons/rx'
 import { BarLoader } from 'react-spinners'
 import FeedCard from '../../component/card/FeedCard'
+import ChangeTittle from '../../context/ChangeTittle'
+
 import { UseUser } from '../../context/UseAuth'
 function About() {
   const [toggle, setToggle] = useState(false)
@@ -14,6 +16,8 @@ function About() {
   const { user, db_user, update_profile, set_update_profile } = useContext(
     UseUser,
   )
+  ChangeTittle('About')
+
   useEffect(() => {
     const fetch_fun = async () => {
       const fetch_url = await fetch(

@@ -48,7 +48,7 @@ function LeftSidebar() {
         </Link>
       </div>
       <div className="sidebar">
-        {nav_items.map((e, i) => (
+        {nav_items?.map((e, i) => (
           <NavLink
             key={i}
             to={e.path}

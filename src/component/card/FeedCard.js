@@ -18,6 +18,7 @@ function FeedCard({ ...reset }) {
     shadow,
     comment_show,
   } = reset
+
   const [comment, setComment] = useState([])
   const [load_comment, set_load_comment] = useState(true)
   const [like, setLike] = useState(true)
