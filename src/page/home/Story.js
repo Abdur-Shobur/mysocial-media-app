@@ -6,16 +6,21 @@ import { Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import MyDayCard from '../../component/card/MyDayCard'
 import { BeatLoader } from 'react-spinners'
+import DayLoader from '../../component/loader/DayLoader'
 
 function Story({ user, db_user }) {
   const [myDay, setMyDay] = useState([])
-  const [loading, setLoading] = useState()
+  const [loading, setLoading] = useState(false)
   const [load_day, set_load_day] = useState()
+  const [day_load, set_day_load] = useState(true)
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_URL}/my-day`)
       .then((res) => res.json())
-      .then((data) => setMyDay(data))
+      .then((data) => {
+        setMyDay(data)
+        set_day_load(false)
+      })
       .catch((err) => console.log(err))
   }, [load_day, user])
 
@@ -81,74 +86,81 @@ function Story({ user, db_user }) {
     }
     e.target.reset()
   }
-  return (
-    <div className="storiesa flex">
-      <div className="flex justify-center items-center ">
-        <form
-          onSubmit={my_day_handler}
-          className="flex justify-center items-center flex-col gap-1"
-        >
-          <label htmlFor="icon-button-files">
-            <RiImageAddFill
-              color="primary"
-              aria-label="upload picture"
-              component="span"
-              className="text-4xl mx-auto cursor-pointer text-indigo-900"
-            />
-          </label>
-          <input
-            // accept="image/*"
-            name="image"
-            id="icon-button-files"
-            type="file"
-            style={{ display: 'none' }}
-          />
 
-          <button className="text-sm px-3 rounded py-1 w-full btn-primary !flex justify-center items-center">
-            {loading ? (
-              <BeatLoader
-                color="#ffffff"
-                size={5}
-                className="inline-block py-1 px-2"
+  return (
+    <div>
+      {!db_user || day_load ? (
+        <DayLoader />
+      ) : (
+        <div className="storiesa flex">
+          <div className="flex justify-center items-center ">
+            <form
+              onSubmit={my_day_handler}
+              className="flex justify-center items-center flex-col gap-1"
+            >
+              <label htmlFor="icon-button-files">
+                <RiImageAddFill
+                  color="primary"
+                  aria-label="upload picture"
+                  component="span"
+                  className="text-4xl mx-auto cursor-pointer text-indigo-900"
+                />
+              </label>
+              <input
+                // accept="image/*"
+                name="image"
+                id="icon-button-files"
+                type="file"
+                style={{ display: 'none' }}
               />
-            ) : (
-              'Upload'
-            )}
-          </button>
-        </form>
-      </div>
-      <Swiper
-        virtual
-        slidesPerView={3}
-        spaceBetween={20}
-        slidesPerGroup={3}
-        loop={true}
-        loopFillGroupWithBlank={true}
-        pagination={{
-          clickable: true,
-        }}
-        breakpoints={{
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 40,
-            // slidesPerGroup: 3,
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-            // slidesPerGroup: 3,
-          },
-        }}
-        navigation={true}
-        modules={[Pagination, Navigation, Virtual]}
-        className="stories w-full md:max-w-md lg:max-w-xl  absolute "
-      >
-        {myDay.map((e, i) => (
-          <SwiperSlide key={e._id} virtualIndex={i}>
-            <MyDayCard data={e} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+
+              <button className="text-sm px-3 rounded py-1 w-full btn-primary !flex justify-center items-center">
+                {loading ? (
+                  <BeatLoader
+                    color="#ffffff"
+                    size={5}
+                    className="inline-block py-1 px-2"
+                  />
+                ) : (
+                  'Upload'
+                )}
+              </button>
+            </form>
+          </div>
+          <Swiper
+            virtual
+            slidesPerView={3}
+            spaceBetween={20}
+            slidesPerGroup={3}
+            loop={true}
+            loopFillGroupWithBlank={true}
+            pagination={{
+              clickable: true,
+            }}
+            breakpoints={{
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 40,
+                // slidesPerGroup: 3,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+                // slidesPerGroup: 3,
+              },
+            }}
+            navigation={true}
+            modules={[Pagination, Navigation, Virtual]}
+            className="stories w-full md:max-w-md lg:max-w-xl  absolute "
+          >
+            {myDay.map((e, i) => (
+              <SwiperSlide key={e._id} virtualIndex={i}>
+                <MyDayCard data={e} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
     </div>
   )
 }

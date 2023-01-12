@@ -1,0 +1,50 @@
+.card {
+  width: 100%;
+  background: rgba(255, 255, 255, 0);
+  box-shadow: 0 6px 20px #ddd;
+  margin-top: 1rem;
+}
+.add_height {
+  box-shadow: none;
+}
+.add_height .img {
+  height: 300px !important;
+  border-radius: 10px !important;
+}
+.header .img {
+  height: 55px;
+  width: 100%;
+  background: #d9d9d9;
+  border-radius: 50px;
+  position: relative;
+  overflow: hidden;
+}
+
+.header .img::before {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    #d9d9d9 0%,
+    rgba(0, 0, 0, 0.07) 20%,
+    #d9d9d9 40%,
+    #d9d9d9 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 450px 400px;
+  animation: shimmer 1s linear infinite;
+}
+.header .img::before {
+  background-size: 650px 600px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}

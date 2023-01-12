@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { BarLoader } from 'react-spinners'
 import FeedCard from '../../component/card/FeedCard'
+import AboutLoader from '../../component/loader/AboutLoader'
+import LoadFeedCard from '../../component/loader/LoadFeedCard'
 import ChangeTittle from '../../context/ChangeTittle'
 import { UseUser } from '../../context/UseAuth'
 
@@ -13,6 +15,7 @@ function UserAbout() {
   const [loader, setLoader] = useState(true)
   const [load_post, set_load_post] = useState(false)
   const [load_more, set_load_more] = useState(6)
+  const [load_user, set_load_user] = useState(true)
 
   ChangeTittle(`About`)
   useEffect(() => {
@@ -22,6 +25,7 @@ function UserAbout() {
       )
       const response = await fetch_url.json()
       setUserById(response)
+      set_load_user(false)
     }
     fetch_fun()
   }, [params])
@@ -41,36 +45,43 @@ function UserAbout() {
 
   return (
     <div>
-      <div className="bg-white font-semibold text-center rounded-3xl  border shadow-lg p-10">
-        <img
-          className="mb-3 w-32 h-32 rounded-full mx-auto shadow-lg"
-          src={userById?.info?.photoUrl}
-          alt="product designer"
-        />
-        <h1 className="text-lg text-gray-700"> {userById?.name}</h1>
-        <h3 className="text-sm text-gray-400">Email: {userById?.email}</h3>
-        <h3 className="text-sm text-gray-400">
-          University: {userById?.info?.university}
-        </h3>
-        <h3 className="text-sm text-gray-400">
-          Address: {userById?.info?.address}
-        </h3>
-        <p className="text-xs text-gray-400 mt-4">{userById?.info?.about_me}</p>
-        <button className="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">
-          Message me
-        </button>
-      </div>
+      {load_user ? (
+        <AboutLoader />
+      ) : (
+        <div className="bg-white font-semibold text-center rounded-3xl  border shadow-lg p-10">
+          <img
+            className="mb-3 w-32 h-32 rounded-full mx-auto shadow-lg"
+            src={userById?.info?.photoUrl}
+            alt="product designer"
+          />
+          <h1 className="text-lg text-gray-700"> {userById?.name}</h1>
+          <h3 className="text-sm text-gray-400">Email: {userById?.email}</h3>
+          <h3 className="text-sm text-gray-400">
+            University: {userById?.info?.university}
+          </h3>
+          <h3 className="text-sm text-gray-400">
+            Address: {userById?.info?.address}
+          </h3>
+          <p className="text-xs text-gray-400 mt-4">
+            {userById?.info?.about_me}
+          </p>
+          <button className="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">
+            Message me
+          </button>
+        </div>
+      )}
       <div className="mt-10">
         <h1 className="text-xl text-sky-800 font-semibold">
           {userById.name} post is Here
         </h1>
+        {loader && (
+          <div className="flex items-center justify-center mt-5 flex-col">
+            <LoadFeedCard />
+            <LoadFeedCard />
+            <LoadFeedCard />
+          </div>
+        )}
         <div className="feeds">
-          {loader && (
-            <div className="flex items-center justify-center mt-5">
-              <BarLoader color="#36d7b7" width={'100%'} />
-            </div>
-          )}
-
           {user_post?.map((post) => (
             <FeedCard
               key={post._id}

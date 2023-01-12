@@ -105,6 +105,9 @@ nav .container {
 nav .search-bar input[type='search']::placeholder {
   color: var(--color-gray);
 }
+.flex-col {
+  flex-direction: column;
+}
 
 nav .create {
   display: flex;

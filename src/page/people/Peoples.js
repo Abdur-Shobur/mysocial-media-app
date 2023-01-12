@@ -4,6 +4,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import { UseUser } from '../../context/UseAuth'
 import { BarLoader } from 'react-spinners'
 import ChangeTittle from '../../context/ChangeTittle'
+import FriendLoader from '../../component/loader/FriendLoader'
 
 function Peoples() {
   const { db_user } = useContext(UseUser)
@@ -88,8 +89,15 @@ function Peoples() {
         <TabPanel>
           <div>
             {loader && (
-              <div className="flex items-center justify-center mt-5 mb-3">
-                <BarLoader color="#36d7b7" width={'100%'} />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <FriendLoader />
+                <FriendLoader />
+                <FriendLoader />
+                <FriendLoader />
+                <FriendLoader />
+                <FriendLoader />
+                <FriendLoader />
+                <FriendLoader />
               </div>
             )}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

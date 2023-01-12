@@ -5,6 +5,8 @@ import CreatePost from './CreatePost'
 import Story from './Story'
 import { BarLoader } from 'react-spinners'
 import ChangeTittle from '../../context/ChangeTittle'
+import LoadFeedCard from '../../component/loader/LoadFeedCard'
+import PostFormLoader from '../../component/loader/PostFormLoader'
 function Home() {
   ChangeTittle('My Social App')
   const { user, db_user } = useContext(UseUser)
@@ -28,13 +30,23 @@ function Home() {
   return (
     <div className="middle">
       <Story user={user} db_user={db_user} />
-
-      <CreatePost user={user} db_user={db_user} set_load_post={set_load_post} />
+      {!db_user ? (
+        <PostFormLoader />
+      ) : (
+        <CreatePost
+          user={user}
+          db_user={db_user}
+          set_load_post={set_load_post}
+        />
+      )}
 
       <div className="feeds">
         {loader && (
-          <div className="flex items-center justify-center mt-5">
-            <BarLoader color="#36d7b7" width={'100%'} />
+          <div className="flex items-center justify-center flex-col mt-5">
+            <LoadFeedCard />
+            <LoadFeedCard />
+            <LoadFeedCard />
+            <LoadFeedCard />
           </div>
         )}
 

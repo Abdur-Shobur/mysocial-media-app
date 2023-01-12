@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { BarLoader } from 'react-spinners'
 import FeedCard from '../../component/card/FeedCard'
+import LoadFeedCard from '../../component/loader/LoadFeedCard'
 import ChangeTittle from '../../context/ChangeTittle'
 import { UseUser } from '../../context/UseAuth'
 
@@ -23,8 +24,10 @@ function Media() {
   return (
     <div className="feeds">
       {loader && (
-        <div className="flex items-center justify-center mt-5">
-          <BarLoader color="#36d7b7" width={'100%'} />
+        <div className="flex items-center justify-center flex-col mt-5">
+          <LoadFeedCard />
+          <LoadFeedCard />
+          <LoadFeedCard />
         </div>
       )}
       {post?.map((post) => (

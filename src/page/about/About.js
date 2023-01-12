@@ -3,6 +3,8 @@ import { BsUpload } from 'react-icons/bs'
 import { RxCross2 } from 'react-icons/rx'
 import { BarLoader } from 'react-spinners'
 import FeedCard from '../../component/card/FeedCard'
+import AboutLoader from '../../component/loader/AboutLoader'
+import LoadFeedCard from '../../component/loader/LoadFeedCard'
 import ChangeTittle from '../../context/ChangeTittle'
 
 import { UseUser } from '../../context/UseAuth'
@@ -220,39 +222,43 @@ function About() {
           </div>
         )}
         {/* end edit from  */}
-
-        <div className="bg-white font-semibold text-center rounded-3xl  border shadow-lg p-10">
-          <img
-            className="mb-3 w-32 h-32 rounded-full mx-auto shadow-lg"
-            src={user && db_user?.info?.photoUrl}
-            alt="product designer"
-          />
-          <h1 className="text-lg text-gray-700"> {user && db_user?.name}</h1>
-          <h3 className="text-sm text-gray-400">
-            Email: {user && db_user?.email}
-          </h3>
-          <h3 className="text-sm text-gray-400">
-            University: {user && db_user?.info?.university}
-          </h3>
-          <h3 className="text-sm text-gray-400">
-            Address: {user && db_user?.info?.address}
-          </h3>
-          <p className="text-xs text-gray-400 mt-4">
-            {user && db_user?.info?.about_me}
-          </p>
-          {/* <button className="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">
+        {!db_user ? (
+          <AboutLoader />
+        ) : (
+          <div className="bg-white font-semibold text-center rounded-3xl  border shadow-lg p-10">
+            <img
+              className="mb-3 w-32 h-32 rounded-full mx-auto shadow-lg"
+              src={user && db_user?.info?.photoUrl}
+              alt="product designer"
+            />
+            <h1 className="text-lg text-gray-700"> {user && db_user?.name}</h1>
+            <h3 className="text-sm text-gray-400">
+              Email: {user && db_user?.email}
+            </h3>
+            <h3 className="text-sm text-gray-400">
+              University: {user && db_user?.info?.university}
+            </h3>
+            <h3 className="text-sm text-gray-400">
+              Address: {user && db_user?.info?.address}
+            </h3>
+            <p className="text-xs text-gray-400 mt-4">
+              {user && db_user?.info?.about_me}
+            </p>
+            {/* <button className="bg-indigo-600 px-8 py-2 mt-8 rounded-3xl text-gray-100 font-semibold uppercase tracking-wide">
             Hire Me
           </button> */}
-        </div>
-
+          </div>
+        )}
         <div className="mt-10">
           <h1 className="text-xl text-sky-800 font-semibold">
             Your All Post is Here
           </h1>
           <div className="feeds">
             {loader && (
-              <div className="flex items-center justify-center mt-5">
-                <BarLoader color="#36d7b7" width={'100%'} />
+              <div className="flex items-center justify-center flex-col mt-5">
+                <LoadFeedCard />
+                <LoadFeedCard />
+                <LoadFeedCard />
               </div>
             )}
 

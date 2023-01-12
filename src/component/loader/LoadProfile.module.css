@@ -1,0 +1,70 @@
+.card {
+  width: 100%;
+  background: #fff;
+  padding: 1.2rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px #ddd;
+}
+.card .header {
+  display: flex;
+  align-items: center;
+}
+.header .img {
+  height: 40px;
+  width: 40px;
+  background: #d9d9d9;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+}
+.header .details {
+  margin-left: 20px;
+}
+.details span {
+  display: block;
+  background: #d9d9d9;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+}
+.details .name {
+  height: 15px;
+  width: 100px;
+}
+.details .about {
+  height: 13px;
+  width: 150px;
+  margin-top: 10px;
+}
+.header .img::before,
+.details span::before {
+  position: absolute;
+  content: '';
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    to right,
+    #d9d9d9 0%,
+    rgba(0, 0, 0, 0.07) 20%,
+    #d9d9d9 40%,
+    #d9d9d9 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 450px 400px;
+  animation: shimmer 1s linear infinite;
+}
+.header .img::before {
+  background-size: 650px 600px;
+}
+.details span::before {
+  animation-delay: 0.2s;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -450px 0;
+  }
+  100% {
+    background-position: 450px 0;
+  }
+}
